@@ -211,3 +211,181 @@ public:
 };
 ```
 ## 📅 Day 2
+
+### 7. **Binary Search**  
+**Difficulty:** Easy  
+**Concept/Approach:** Binary Search 
+
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int st=0,end = nums.size()-1;
+        while(st<=end){
+            int mid = st+(end-st)/2;
+            if(nums[mid]==target){
+                return mid;
+            }
+            else if(nums[mid]<target){
+                st = mid+1;
+            }
+            else{
+                end = mid-1;
+            }
+        }
+        return -1;
+    }
+};
+```
+### 8. **Single Number**  
+**Difficulty:** Easy  
+**Concept/Approach:** Bit Manipulation
+
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int ans = 0;
+        for(int i = 0;i<nums.size();i++){
+            ans = ans ^ nums[i];
+        }
+        return ans;
+    }
+};
+```
+### 9. **Fibonacci Number**  
+**Difficulty:** Easy  
+**Concept/Approach:** Recursion
+
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int fib(int n) {
+        if(n==0){
+            return 0;
+        }
+        if(n==1){
+            return 1;
+        }
+        return fib(n-1)+fib(n-2);
+    }
+};
+```
+### 10. **Two Sum**  
+**Difficulty:** Easy  
+**Concept/Approach:** Hashing
+
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int>vec;
+        for(int i = 0;i<nums.size();i++){
+            vec[nums[i]]=i;
+        }
+        for(int i = 0;i<nums.size();i++){
+            int indd = target-nums[i];
+                if(vec.find(indd)==vec.end()){
+                    continue;
+                }
+                else{
+                    int idx = vec[indd];
+                    if(idx==i){
+                        continue;
+                    }
+                    return {i,idx};
+                }
+        }
+        return {0,0};
+    }
+};
+```
+### 11. **Find Missing and Repeated Values**  
+**Difficulty:** Easy  
+**Concept/Approach:** Maths
+
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    vector<int> findMissingAndRepeatedValues(vector<vector<int>>& grid) {
+        long long n = grid.size() * grid.size();
+        long long gridsum = 0, gridsqsum = 0;
+        
+        for(int i = 0; i < grid.size(); i++) {
+            for(int j = 0; j < grid.size(); j++) {
+                gridsum += grid[i][j];
+                gridsqsum += 1LL * grid[i][j] * grid[i][j];
+            }
+        }
+        
+        long long exsum = n * (n + 1) / 2;
+        long long exsqsum = n * (n + 1) * (2 * n + 1) / 6;
+        
+        long long diff = exsum - gridsum;            // a - b
+        long long sqdiff = exsqsum - gridsqsum;      // a^2 - b^2
+        
+        long long sum_ab = sqdiff / diff;            // a + b
+        
+        long long a = (diff + sum_ab) / 2;           // missing
+        long long b = a - diff;                      // repeated
+        
+        return {(int)b, (int)a};
+    }
+};
+```
+### 12. **Find Duplicate**  
+**Difficulty:** Medium  
+**Concept/Approach:** Hashing
+
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        unordered_set<int>s;
+        for(int i = 0;i<nums.size();i++){
+            if(s.find(nums[i])!=s.end()){
+                return nums[i];
+            }
+            s.insert(nums[i]);
+        }
+        return nums[0];
+    }
+};
+```
+### 13. **First Unique Character in String**  
+**Difficulty:** Easy
+**Concept/Approach:** Counting
+
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        vector<int>vec(26,0);
+        for(int i = 0;i<s.size();i++){
+            vec[s[i]-'a']++;
+        }
+        for(int i = 0;i<s.size();i++){
+            if(vec[s[i]-'a']==1){
+                return i;
+            }
+        }
+        return -1;
+    }
+};
+```
+## 📅 Day 3
+
