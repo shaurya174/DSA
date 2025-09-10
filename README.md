@@ -389,3 +389,301 @@ public:
 ```
 ## 📅 Day 3
 
+### 14. **Valid Parenthesis**  
+**Difficulty:** Easy
+**Concept/Approach:** Stack
+
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char>ss;
+        for(int i = 0;i<s.size();i++){
+            if(ss.empty()){
+                ss.push(s[i]);
+            }
+            else if(s[i]=='('){
+                ss.push(s[i]);
+            }
+            else if(s[i]=='{'){
+                ss.push(s[i]);
+            }
+            else if(s[i]=='['){
+                ss.push(s[i]);
+            }
+            else{
+                if(s[i]==']'){
+                    if(ss.top()=='['){
+                        ss.pop();
+                    }
+                    else{
+                        ss.push(s[i]);
+                    }
+                }
+                else if(s[i]==')'){
+                    if(ss.top()=='('){
+                        ss.pop();
+                    }
+                    else{
+                        ss.push(s[i]);
+                    }
+                }
+                else{
+                    if(ss.top()=='{'){
+                        ss.pop();
+                    }
+                    else{
+                        ss.push(s[i]);
+                    }
+                }
+            }
+        }
+        if(ss.empty()){
+            return true;
+        }
+        return false;
+    }
+};
+```
+### 15. **Implement Stack Using Queue**  
+**Difficulty:** Easy
+**Concept/Approach:** Queues
+
+**Solution:**
+```cpp
+class MyStack {
+public:
+    queue<int>q;
+    MyStack() {
+        
+    }
+    
+    void push(int x) {
+        q.push(x);
+    }
+    
+    int pop() {
+        queue<int>q2;
+        while(true){
+            if(q.size()==1){
+                int tt = q.front();
+                q = q2;
+                return tt;
+            }
+            int cc = q.front();
+            q2.push(cc);
+            q.pop();
+        }
+    }
+    
+    int top() {
+        return q.back();
+    }
+    
+    bool empty() {
+        return q.empty();
+    }
+};
+```
+### 16. **Implement Queue Using Stack**  
+**Difficulty:** Easy
+**Concept/Approach:** Stack
+
+**Solution:**
+```cpp
+class MyQueue {
+public:
+    stack<int>s;
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        if(s.empty()){
+            s.push(x);
+        }
+        else{
+            stack<int>s2;
+            while(!s.empty()){
+                s2.push(s.top());
+                s.pop();
+            }
+            s.push(x);
+            while(!s2.empty()){
+                s.push(s2.top());
+                s2.pop();
+            }
+        }
+    }
+    
+    int pop() {
+        int x = s.top();
+        s.pop();
+        return x;
+    }
+    
+    int peek() {
+        return s.top();
+    }
+    
+    bool empty() {
+        return s.empty();
+    }
+};
+```
+### 17. **Preorder Traversal**  
+**Difficulty:** Easy
+**Concept/Approach:** Recursion
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    vector<int>ans;
+    void pree(TreeNode* root){
+        if(root==nullptr){
+            return;
+        }
+        ans.push_back(root->val);
+        pree(root->left);
+        pree(root->right);
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        pree(root);
+        return ans;
+    }
+};
+```
+### 18. **Inorder Traversal**  
+**Difficulty:** Easy
+**Concept/Approach:** Recursion
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    vector<int>ans;
+    void inn(TreeNode* root){
+        if(root==nullptr){
+            return;
+        }
+        
+        inn(root->left);
+        ans.push_back(root->val);
+        inn(root->right);
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        inn(root);
+        return ans;
+    }
+};
+```
+### 19. **Postorder Traversal**  
+**Difficulty:** Easy
+**Concept/Approach:** Recursion
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    vector<int>ans;
+    void poos(TreeNode* root){
+        if(root==nullptr){
+            return;
+        }
+        
+        poos(root->left);
+        
+        poos(root->right);
+        ans.push_back(root->val);
+    }
+    
+    vector<int> postorderTraversal(TreeNode* root) {
+        poos(root);
+        return ans;
+    }
+};
+```
+### 20. **Level Order Traversal**  
+**Difficulty:** Medium
+**Concept/Approach:** Queue,BFS
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    
+    vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> ans;
+    if(!root) return ans;
+
+    queue<TreeNode*> q;
+    q.push(root);
+    q.push(nullptr);  // marker for level end
+
+    vector<int> curr;
+
+    while(!q.empty()) {
+        TreeNode* node = q.front();
+        q.pop();
+
+        if(node == nullptr) { // end of current level
+            ans.push_back(curr);
+            curr.clear();
+            if(!q.empty()) q.push(nullptr);
+        } else {
+            curr.push_back(node->val);
+            if(node->left) q.push(node->left);
+            if(node->right) q.push(node->right);
+        }
+    }
+
+    return ans;
+}
+
+};
+```
+### 21. **3 Sum**  
+**Difficulty:** Medium
+**Concept/Approach:** Hashing
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<vector<int>>ans;
+        for(int i = 0;i<nums.size();i++){
+            if(i > 0 && nums[i] == nums[i-1]) continue;
+            int target = 0-nums[i];
+            int start = i+1;
+            int end = nums.size()-1;
+            while(start<end){
+                if(nums[start]+nums[end]<target){
+                    start++;
+                }
+                else if(nums[start]+nums[end]>target){
+                    end--;
+                }
+                else{
+                    vector<int>cans={nums[i],nums[start],nums[end]};
+                    ans.push_back(cans);
+                    start++;
+                    end--;
+                    while(start < end && nums[start] == nums[start-1]) start++;
+                    // skip duplicates for end
+                    while(start < end && nums[end] == nums[end+1]) end--;     
+                }
+            }
+        }
+        return ans;
+             
+    }
+};
+```
+## 📅 Day 4
+
+
