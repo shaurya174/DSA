@@ -684,6 +684,166 @@ public:
     }
 };
 ```
+
 ## 📅 Day 4
 
+### 22. **Middle Of Linked List**  
+**Difficulty:** Easy
+**Concept/Approach:** “Tortoise and Hare” (Slow and Fast Pointer)
 
+**Solution:**
+```cpp
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* tem = head;
+        ListNode* cem = head;
+        if(head->next==nullptr){
+            return head;
+        }
+        while(true){
+            cem = cem->next->next;
+            tem=tem->next;
+            if((cem==nullptr)||(cem->next==nullptr)){
+                break;
+            }
+        }
+        return tem;
+    }
+};
+```
+
+### 23. **Count Primes**  
+**Difficulty:** Medium
+**Concept/Approach:** Sieve Of Erastrothenes
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int countPrimes(int n) {
+        if(n <= 2) return 0; // nothing to do if n < 2
+
+        vector<int> vec(n, 1);
+        vec[0] = 0;
+        vec[1] = 0;
+
+        for(int i = 2; i < n; i++){
+            if(vec[i] == 0) continue;
+
+            for(int j = i*2; j < n; j += i){
+                vec[j] = 0;
+            }
+        }
+
+        int ans = 0;
+        for(int i = 2; i < n; i++){
+            if(vec[i] == 1) ans++;
+        }
+        return ans;
+    }
+};
+```
+
+### 24. **Reverse Integer**  
+**Difficulty:** Medium
+**Concept/Approach:** Math
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int reverse(int x) {
+        int revNum = 0;
+        while(x!=0){
+            int dig = x%10;
+            x=x/10;
+            if(revNum>INT_MAX/10){
+                return 0;
+            }
+            if(revNum<INT_MIN/10){
+                return 0;
+            }
+            revNum=revNum*10+dig;
+        }
+        return revNum;
+    }
+};
+```
+
+### 25. **Palindrome Number**  
+**Difficulty:** Easy
+**Concept/Approach:** Math
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0){
+            return false;
+        }
+        int n = x;
+        int revNum = 0;
+        int cc = 0;
+        while(n!=0){
+            int dig = n%10;
+            n=n/10;
+            if(revNum<INT_MIN/10){
+                return 0;
+            }
+            else if(revNum>INT_MAX/10){
+                return 0;
+            }
+            revNum = revNum*10 + dig;
+        }
+        if(revNum==x){
+            return true;
+        }
+        return false;
+    }
+};
+```
+
+### 26. **Identical Tree**  
+**Difficulty:** Easy
+**Concept/Approach:** Recursion
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p==nullptr){
+            if(q==nullptr){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        if(q==nullptr){
+            if(p==nullptr){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        if(p->val==q->val){
+            if(!isSameTree(p->left,q->left)){
+                return false;
+            }
+            if(!isSameTree(p->right,q->right)){
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+        return true;
+    }
+};
+```
+
+## 📅 Day 5
