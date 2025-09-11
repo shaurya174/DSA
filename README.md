@@ -978,3 +978,38 @@ public:
 };
 ```
 
+### 32. **Move Zeroes**  
+**Difficulty:** Easy
+**Concept/Approach:** Two Pointer
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int cc = 0;
+        int j = 0;
+        for(int i = 0;i<nums.size();i++){
+            if(nums[i]!=0){
+                cc++;
+            }
+        }
+        for(int i = 0;i<nums.size();i++){
+            if(nums[i]!=0){
+                nums[j]=nums[i];
+                j++;
+            }
+            
+
+        }
+        for(int i = 0;i<nums.size();i++){
+            if(i>=cc){
+                nums[i]=0;
+            }
+        }
+        
+
+    }
+};
+```
+
