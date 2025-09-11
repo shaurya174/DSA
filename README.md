@@ -1060,3 +1060,27 @@ public:
 };
 
 ```
+
+### 35. **Delete Node in a Linked List**  
+**Difficulty:** Medium
+**Concept/Approach:** Linked List
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        ListNode* temp = node;
+        while(temp!=nullptr){
+            temp->val=temp->next->val;
+            if(temp->next->next==nullptr){
+                break;
+            }
+            temp=temp->next;
+        }
+        temp->next=nullptr;
+
+    }
+};
+```
+
