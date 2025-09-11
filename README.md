@@ -1013,3 +1013,26 @@ public:
 };
 ```
 
+### 33. **Maximum Depth of Binary Tree**  
+**Difficulty:** Easy
+**Concept/Approach:** Recursion
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        int ans = 0;
+        int ind=0;
+        int cnd=0;
+        if(root==nullptr){
+            return 0;
+        }
+        ans++;
+        ind =maxDepth(root->left);
+        cnd = maxDepth(root->right);
+        ans+=max(ind,cnd);
+        return ans;
+    }
+};
+```
