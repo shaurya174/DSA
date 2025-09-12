@@ -1084,3 +1084,33 @@ public:
 };
 ```
 
+## 📅 Day 6
+
+### 36. **Group Anagrams**  
+**Difficulty:** Medium
+**Concept/Approach:** Hashmap
+
+**Solution:**
+```cpp
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<string,vector<string>>vec;
+        for(int i = 0;i<strs.size();i++){
+            vector<int>vecc(26,0);
+            for(int j = 0;j<strs[i].size();j++){
+                vecc[strs[i][j]-'a']++;
+            }
+            string strr = "";
+            for(int j = 0;j<26;j++){
+                strr+=vecc[j];
+                strr+=",";
+            }
+            vec[strr].push_back(strs[i]);
+        }
+        vector<vector<string>>ans;
+        for(auto it:vec){
+            ans.push_back(it.second);
+        }
+        return ans;
+    }
+```
+
