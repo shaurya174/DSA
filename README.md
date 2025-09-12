@@ -1114,3 +1114,34 @@ vector<vector<string>> groupAnagrams(vector<string>& strs) {
     }
 ```
 
+### 37.Find All Anagrams in a String
+**Difficulty:** Medium
+**Concept/Approach:** Hashmap
+
+**Solution:**
+```cpp
+vector<int> findAnagrams(string s, string p) {
+        if(p.size()>s.size()){
+            return {};
+        }
+        vector<int>ans;
+        vector<int>vec1(26,0);
+        vector<int>vec2(26,0);
+        for(int i = 0;i<p.size();i++){
+            vec1[p[i]-'a']++;
+            vec2[s[i]-'a']++;
+        }
+        if(vec1==vec2){
+            ans.push_back(0);
+        }
+        for(int i = p.size();i<s.size();i++){
+            vec2[s[i-p.size()]-'a']--;
+            vec2[s[i]-'a']++;
+            if(vec1==vec2){
+                ans.push_back(i-p.size()+1);
+            }
+        }
+        return ans;
+    }
+```
+
