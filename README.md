@@ -1145,3 +1145,24 @@ vector<int> findAnagrams(string s, string p) {
     }
 ```
 
+### 38. Maximum Subarray
+**Difficulty:** Medium
+**Concept/Approach:** Kadane's Algo
+
+**Solution:**
+```cpp
+int maxSubArray(vector<int>& nums) {
+        int ans = INT_MIN;
+        int currSum = 0;
+        for(int i = 0;i<nums.size();i++){
+            currSum += nums[i];
+            ans = max(currSum,ans);
+            if(currSum<0){
+                currSum=0;
+            }
+        }
+        return ans;
+    }
+```
+
+
