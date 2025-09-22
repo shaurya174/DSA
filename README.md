@@ -1165,4 +1165,22 @@ int maxSubArray(vector<int>& nums) {
     }
 ```
 
+### 39. Missing Number
+**Difficulty:** Easy
+**Concept/Approach:** 10th MATHS NCERT
+
+**Solution:**
+```cpp
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int sum = nums.size()*(nums.size()+1)/2;
+        int csum = 0;
+        for(int i = 0;i<nums.size();i++){
+            csum+=nums[i];
+        }
+        return sum-csum;
+    }
+};
+```
 
