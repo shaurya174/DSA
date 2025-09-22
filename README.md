@@ -1203,3 +1203,16 @@ public:
 };
 ```
 
+### 41. Reverse Bits
+**Difficulty:** Medium
+**Concept/Approach:** Bit Manipulation
+
+**Solution:**
+```cpp
+uint32_t ans = 0;
+        for(int i = 0; i < 32; i++){
+            ans = (ans << 1) | (n & 1);  // shift ans and add last bit of n
+            n = n >> 1;                  // move to next bit
+        }
+        return ans;
+```
